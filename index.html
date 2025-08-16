@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-slate-950 min-h-screen flex justify-center items-center">
+    <div class="w-[450px] bg-slate-800 p-5 rounded-md">
+      <div class="mb-5">
+        <h1 class="text-center font-bold text-2xl text-white mb-5">
+          Expense Tracker
+        </h1>
+        <form class="flex gap-2 justify-between" id="form">
+          <input
+            type="text"
+            placeholder="Expense Name"
+            class="w-[150px] px-3 bg-slate-500 rounded-md text-white"
+            id="inputExpense"
+          />
+          <input
+            type="text"
+            placeholder="Amount"
+            class="w-[150px] px-3 bg-slate-500 rounded-md text-white"
+            id="inputAmount"
+          />
+          <button
+            type="submit"
+            class="bg-blue-700 px-1 rounded-md text-white"
+            id="formBtn"
+          >
+            Add Expense
+          </button>
+        </form>
+      </div>
+      <div class="mb-5">
+        <h1 class="text-center font-bold text-2xl text-white mb-5">Expenses</h1>
+        <ul id="ExpenseList">
+          <!-- THIS WILL BE CREAETD DINAMICALLY BY THE JS -->
+
+          <!-- <li
+            class="p-3 bg-slate-700 flex justify-between items-center rounded-md"
+          >
+            <p class="text-white">Movie - $100.00</p>
+            <button class="bg-blue-700 px-3 py-1 rounded-md text-white">
+              Delete
+            </button>
+          </li> -->
+        </ul>
+      </div>
+      <div class="text-lg font-bold text-white text-center" id="totalExpense">
+        Total : $89
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
