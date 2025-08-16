@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // THIS LINE WILL ENSURE THAT JS WILL WORK AFTER THE HTML AND CSS WILL LOAD
 
-  const Expensearr = [];
   const form = document.getElementById("form");
   const inputExpense = document.getElementById("inputExpense");
   const inputAmount = document.getElementById("inputAmount");
@@ -9,13 +8,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const ExpenseList = document.getAnimations("ExpenseList");
   const totalExpense = document.getElementById("totalExpense");
 
-  const Expense = inputExpense.addEventListener("click", (e) => {
-    e.target.value;
-  });
-  const Amount = inputAmount.addEventListener("click", (e) => {
-    e.target.value;
-  });
-  formBtn.addEventListener("click", (e) => {
+  let expencesarr = [];
+  let TotalAmount = calculate();
+
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
+    const name = inputExpense.value.trim();
+    const amount = parseFloat(inputAmount.value.trim());
+
+    if (name !== "" && amount > 0 && !isNaN(amount)) {
+      const newExpense = {
+        id: Date.now(),
+        name, // name : name
+        amount, // amount : amount
+      };
+      expencesarr.push(newExpense);
+      saveExpenseLocal();
+      randerExpenses();
+      updateTotal();
+
+      inputExpense.value = "";
+      inputAmount.value = "";
+    }
   });
+  function calculate() {
+    return expencesarr.reduce((acc, expense) => acc + expense.amount, 0);
+  }
+
+  function saveExpenseLocal() {
+    localStorage.setItem("expenses", JSON.stringify(expencesarr));
+  }
+
+  function updateTotal() {
+    TotalAmount = calculate();
+    totalExpense.textContent = `Total : $${TotalAmount}`;
+  }
+
+  function randerExpenses() {
+    expencesarr.forEach((item) => {});
+  }
 });
