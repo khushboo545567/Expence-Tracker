@@ -5,11 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputExpense = document.getElementById("inputExpense");
   const inputAmount = document.getElementById("inputAmount");
   const formBtn = document.getElementById("formBtn");
-  const ExpenseList = document.getAnimations("ExpenseList");
+  const ExpenseList = document.getElementById("ExpenseList");
   const totalExpense = document.getElementById("totalExpense");
 
-  let expencesarr = [];
-  let TotalAmount = calculate();
+  let expencesarr = JSON.parse(localStorage.getItem("expenses")) || [];
+  let TotalAmount = updateTotal();
+  randerExpenses();
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -40,11 +41,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateTotal() {
-    TotalAmount = calculate();
-    totalExpense.textContent = `Total : $${TotalAmount}`;
+    const total = calculate();
+    totalExpense.textContent = `Total : $${total}`;
+    return total;
   }
 
   function randerExpenses() {
-    expencesarr.forEach((item) => {});
+    ExpenseList.textContent = "";
+    expencesarr.forEach((item) => {
+      const li = document.createElement("li");
+      li.className =
+        "p-3 bg-slate-700 flex justify-between items-center rounded-md mb-3";
+      li.innerHTML = `
+      <p class="text-white">${item.name} - $${item.amount}</p>
+      <button id="${item.id}" class="bg-blue-700 px-3 py-1 rounded-md text-white">Delete</button>
+      `;
+      ExpenseList.appendChild(li);
+    });
   }
+  ExpenseList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+      const expenseId = parseInt(e.target.getAttribute("id"));
+      expencesarr = expencesarr.filter((expense) => expenseId !== expense.id);
+
+      saveExpenseLocal();
+      randerExpenses();
+      updateTotal();
+    }
+  });
 });
